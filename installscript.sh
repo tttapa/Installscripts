@@ -292,59 +292,88 @@ fi
 ## Blender
 
 clear
-read -p "Install Blender 2.77a? [Y/n]: " inst
+read -p "Install Blender 2.78a? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
 then 
 cd /tmp/
-if [ ! -e blender-2.77a-linux-glibc211-x86_64.tar.bz2 ]
+if [ ! -e blender-2.78a-linux-glibc211-x86_64.tar.bz2 ]
 then
 echo "Downloading Blender ..."
-wget "http://download.blender.org/release/Blender2.77/blender-2.77a-linux-glibc211-x86_64.tar.bz2"
+wget "http://download.blender.org/release/Blender2.78/blender-2.78a-linux-glibc211-x86_64.tar.bz2"
 fi
 echo "Extracting ..."
-tar jxf blender-2.77a-linux-glibc211-x86_64.tar.bz2
-mv blender-2.77a-linux-glibc211-x86_64/ "$installdir/blender-2.77a"
-sudo ln -s "$installdir/blender-2.77a/blender" "/usr/bin/blender"
-sudo ln -s "$installdir/blender-2.77a/blender.svg" "/usr/share/icons/hicolor/scalable/apps/blender.svg"
-sudo cp "${installdir}/blender-2.77a/blender.desktop" "/usr/share/applications/blender.desktop"
+tar jxf blender-2.78a-linux-glibc211-x86_64.tar.bz2
+sudo mv blender-2.78a-linux-glibc211-x86_64/ "$installdir/blender-2.78a"
+sudo ln -s "$installdir/blender-2.78a/blender" "/usr/bin/blender"
+sudo ln -s "$installdir/blender-2.78a/blender.svg" "/usr/share/icons/hicolor/scalable/apps/blender.svg"
+sudo cp "${installdir}/blender-2.78a/blender.desktop" "/usr/share/applications/blender.desktop"
 sudo chmod a+x "/usr/share/applications/blender.desktop" 
 echo "application/x-blender=blender.desktop" | sudo tee --append /usr/share/applications/defaults.list
 fi
 
+## Processing
+
 clear
-read -p "Install Processing 3.1.1? [Y/n]: " inst
+read -p "Install Processing 3.2.3? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
 then 
 cd /tmp/
-if [ ! -e processing-3.1.1-linux64.tgz ]
+if [ ! -e processing-3.2.3-linux64.tgz ]
 then
-echo "Downloading Processing 3.1.1 ..."
-wget "http://download.processing.org/processing-3.1.1-linux64.tgz"
+echo "Downloading Processing 3.2.3 ..."
+wget "https://github-cloud.s3.amazonaws.com/releases/7807399/1e28c038-a4b6-11e6-8ac5-a66a2a864e43.tgz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAISTNZFOVBIJMK3TQ%2F20161127%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20161127T214832Z&X-Amz-Expires=300&X-Amz-Signature=434e5822813f988088433d41a5c119d9ac3779c0658c6075c120ae2dde7a6390&X-Amz-SignedHeaders=host&actor_id=0&response-content-disposition=attachment%3B%20filename%3Dprocessing-3.2.3-linux64.tgz&response-content-type=application%2Foctet-stream"
 fi
 echo "Extracting ..."
-tar -xzf processing-3.1.1-linux64.tgz
-mv processing-3.1.1/ /home/$USER/Executables/processing-3.1.1/
+tar -xzf processing-3.2.3-linux64.tgz
+mv processing-3.2.3/ "$installdir/processing-3.2.3/"
+sudo ln -s "$installdir/processing-3.2.3/processing" "/usr/bin/processing"
+# icons
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-16.png" "/usr/share/icons/hicolor/16x16/apps/processing.png"
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-32.png" "/usr/share/icons/hicolor/32x32/apps/processing.png"
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-48.png" "/usr/share/icons/hicolor/48x48/apps/processing.png"
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-64.png" "/usr/share/icons/hicolor/64x64/apps/processing.png"
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-128.png" "/usr/share/icons/hicolor/128x128/apps/processing.png"
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-256.png" "/usr/share/icons/hicolor/256x256/apps/processing.png"
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-512.png" "/usr/share/icons/hicolor/512x512/apps/processing.png"
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-1024.png" "/usr/share/icons/hicolor/1024x1024/apps/processing.png"
+# mime thumbnails
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-16.png" "/usr/share/icons/Humanity/mimes/16/text-x-processing.png"
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-32.png" "/usr/share/icons/Humanity/mimes/32/text-x-processing.png"
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-48.png" "/usr/share/icons/Humanity/mimes/48/text-x-processing.png"
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-64.png" "/usr/share/icons/Humanity/mimes/64/text-x-processing.png"
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-128.png" "/usr/share/icons/Humanity/mimes/128/text-x-processing.png"
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-256.png" "/usr/share/icons/Humanity/mimes/256/text-x-processing.png"
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-512.png" "/usr/share/icons/Humanity/mimes/512/text-x-processing.png"
+sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-1024.png" "/usr/share/icons/Humanity/mimes/1024/text-x-processing.png"
+# desktop launcher
 sudo touch /usr/share/applications/processing.desktop && echo "[Desktop Entry]
-Version=3.1.1
+Version=3.2.3
 Name=Processing
 Comment=Processing
-Exec=/home/$USER/Executables/processing-3.1.1/processing
-Icon=/home/$USER/Executables/processing-3.1.1/lib/icons/pde-256.png
+Exec=processing
+Icon=processing
 Terminal=false
 Type=Application
 Categories=AudioVideo;Video;Game;Graphics;Education;Development;" | sudo tee /usr/share/applications/processing.desktop
-sudo chmod a+x /usr/share/applications/processing.desktop 
+sudo chmod a+x /usr/share/applications/processing.desktop
+# MIME type
 sudo touch /usr/share/mime/packages/processing.xml && echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <mime-info xmlns=\"http://www.freedesktop.org/standards/shared-mime-info\">
     <mime-type type=\"text/x-processing\">
         <comment>Processing source code</comment>
         <sub-class-of type=\"text/x-csrc\"/>
+        <generic-icon name=\"text-x-processing\"/>
         <glob pattern=\"*.pde\"/>
     </mime-type>
 </mime-info>" | sudo tee /usr/share/mime/packages/processing.xml
+sudo gtk-update-icon-cache /usr/share/icons/Humanity
 sudo update-mime-database /usr/share/mime
+sudo gtk-update-icon-cache /usr/share/icons/hicolor
+# file association
 echo "text/x-processing=processing.desktop" | sudo tee --append /usr/share/applications/defaults.list
 fi
+
+# Arduino
 
 clear
 read -p "Install Arduino 1.6.8? [Y/n]: " inst
@@ -631,13 +660,13 @@ then
 		sudo ./eagle-lin64-7_7_0.run
 		sudo ln -s /opt/eagle-7.7.0/bin/eagle /usr/bin
 		sudo ln -s /opt/eagle-7.7.0/bin/icons/Epf.svg /usr/share/icons/hicolor/scalable/apps/eagle.svg
-		sudo ln -s /opt/eagle-7.7.0/bin/icons/Sch.svg /usr/share/icons/Humanity/mimes/48/x-eagle-schematic.svg
-		sudo ln -s /opt/eagle-7.7.0/bin/icons/Brd.svg /usr/share/icons/Humanity/mimes/48/x-eagle-board.svg
-		sudo ln -s /opt/eagle-7.7.0/bin/icons/Lbr.svg /usr/share/icons/Humanity/mimes/48/x-eagle-library.svg
-		sudo ln -s /opt/eagle-7.7.0/bin/icons/Epf.svg /usr/share/icons/Humanity/mimes/48/x-eagle-project.svg
-		sudo ln -s /opt/eagle-7.7.0/bin/icons/Scr.svg /usr/share/icons/Humanity/mimes/48/x-eagle-script.svg
-		sudo ln -s /opt/eagle-7.7.0/bin/icons/Ulp.svg /usr/share/icons/Humanity/mimes/48/x-eagle-ulp.svg
-		sudo ln -s /opt/eagle-7.7.0/bin/icons/Cam.svg /usr/share/icons/Humanity/mimes/48/x-eagle-cam.svg
+		sudo ln -s /opt/eagle-7.7.0/bin/icons/Sch.svg /usr/share/icons/Humanity/mimes/48/application-x-eagle-schematic.svg
+		sudo ln -s /opt/eagle-7.7.0/bin/icons/Brd.svg /usr/share/icons/Humanity/mimes/48/application-x-eagle-board.svg
+		sudo ln -s /opt/eagle-7.7.0/bin/icons/Lbr.svg /usr/share/icons/Humanity/mimes/48/application-x-eagle-library.svg
+		sudo ln -s /opt/eagle-7.7.0/bin/icons/Epf.svg /usr/share/icons/Humanity/mimes/48/application-x-eagle-project.svg
+		sudo ln -s /opt/eagle-7.7.0/bin/icons/Scr.svg /usr/share/icons/Humanity/mimes/48/application-x-eagle-script.svg
+		sudo ln -s /opt/eagle-7.7.0/bin/icons/Ulp.svg /usr/share/icons/Humanity/mimes/48/application-x-eagle-ulp.svg
+		sudo ln -s /opt/eagle-7.7.0/bin/icons/Cam.svg /usr/share/icons/Humanity/mimes/48/application-x-eagle-cam.svg
 		
 		sudo touch /usr/share/applications/eagle.desktop && echo "[Desktop Entry]
 Name=Eagle
@@ -655,43 +684,43 @@ Categories=Development;ProjectManagement;" | sudo tee /usr/share/applications/ea
     <mime-type type=\"application/x-eagle-schematic\">
         <comment>Eagle Schematic</comment>
         <sub-class-of type=\"text/xml\"/>
-        <generic-icon name=\"x-eagle-schematic\"/>
+        <generic-icon name=\"application-x-eagle-schematic\"/>
         <glob pattern=\"*.sch\"/>
     </mime-type>
     <mime-type type=\"application/x-eagle-board\">
         <comment>Eagle Board</comment>
         <sub-class-of type=\"text/xml\"/>
-        <generic-icon name=\"x-eagle-board\"/>
+        <generic-icon name=\"application-x-eagle-board\"/>
         <glob pattern=\"*.brd\"/>
     </mime-type>
     <mime-type type=\"application/x-eagle-library\">
         <comment>Eagle Library</comment>
         <sub-class-of type=\"text/xml\"/>
-        <generic-icon name=\"x-eagle-library\"/>
+        <generic-icon name=\"application-x-eagle-library\"/>
         <glob pattern=\"*.lbr\"/>
     </mime-type>
     <mime-type type=\"application/x-eagle-project\">
         <comment>Eagle Project</comment>
         <sub-class-of type=\"text/plain\"/>
-        <generic-icon name=\"x-eagle-project\"/>
+        <generic-icon name=\"application-x-eagle-project\"/>
         <glob pattern=\"*.epf\"/>
     </mime-type>
     <mime-type type=\"application/x-eagle-script\">
         <comment>Eagle Script</comment>
         <sub-class-of type=\"text/plain\"/>
-        <generic-icon name=\"x-eagle-script\"/>
+        <generic-icon name=\"application-x-eagle-script\"/>
         <glob pattern=\"*.scr\"/>
     </mime-type>
     <mime-type type=\"application/x-eagle-ulp\">
         <comment>Eagle User Language Program</comment>
         <sub-class-of type=\"text/plain\"/>
-        <generic-icon name=\"x-eagle-ulp\"/>
+        <generic-icon name=\"application-x-eagle-ulp\"/>
         <glob pattern=\"*.ulp\"/>
     </mime-type>
     <mime-type type=\"application/x-eagle-cam\">
         <comment>Eagle CAM Job</comment>
         <sub-class-of type=\"text/plain\"/>
-        <generic-icon name=\"x-eagle-cam\"/>
+        <generic-icon name=\"application-x-eagle-cam\"/>
         <glob pattern=\"*.cam\"/>
     </mime-type>
 </mime-info>" | sudo tee /usr/share/mime/packages/eagle.xml
