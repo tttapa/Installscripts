@@ -390,6 +390,7 @@ then
     sudo mv "arduino-1.6.8/" "$installdir/arduino-1.6.8"
     cd "$installdir/arduino-1.6.8"
     ./install.sh
+    sudo ln -s "arduino" "/usr/bin/arduino"
     sudo usermod -a -G dialout $USER
 fi
 
