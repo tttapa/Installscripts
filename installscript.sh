@@ -317,60 +317,60 @@ clear
 read -p "Install Processing 3.2.3? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
 then 
-cd /tmp/
-if [ ! -e processing-3.2.3-linux64.tgz ]
-then
-echo "Downloading Processing 3.2.3 ..."
-wget "https://github-cloud.s3.amazonaws.com/releases/7807399/1e28c038-a4b6-11e6-8ac5-a66a2a864e43.tgz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAISTNZFOVBIJMK3TQ%2F20161127%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20161127T214832Z&X-Amz-Expires=300&X-Amz-Signature=434e5822813f988088433d41a5c119d9ac3779c0658c6075c120ae2dde7a6390&X-Amz-SignedHeaders=host&actor_id=0&response-content-disposition=attachment%3B%20filename%3Dprocessing-3.2.3-linux64.tgz&response-content-type=application%2Foctet-stream"
-fi
-echo "Extracting ..."
-tar -xzf processing-3.2.3-linux64.tgz
-mv processing-3.2.3/ "$installdir/processing-3.2.3/"
-sudo ln -s "$installdir/processing-3.2.3/processing" "/usr/bin/processing"
-# icons
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-16.png" "/usr/share/icons/hicolor/16x16/apps/processing.png"
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-32.png" "/usr/share/icons/hicolor/32x32/apps/processing.png"
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-48.png" "/usr/share/icons/hicolor/48x48/apps/processing.png"
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-64.png" "/usr/share/icons/hicolor/64x64/apps/processing.png"
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-128.png" "/usr/share/icons/hicolor/128x128/apps/processing.png"
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-256.png" "/usr/share/icons/hicolor/256x256/apps/processing.png"
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-512.png" "/usr/share/icons/hicolor/512x512/apps/processing.png"
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-1024.png" "/usr/share/icons/hicolor/1024x1024/apps/processing.png"
-# mime thumbnails
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-16.png" "/usr/share/icons/Humanity/mimes/16/text-x-processing.png"
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-32.png" "/usr/share/icons/Humanity/mimes/32/text-x-processing.png"
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-48.png" "/usr/share/icons/Humanity/mimes/48/text-x-processing.png"
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-64.png" "/usr/share/icons/Humanity/mimes/64/text-x-processing.png"
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-128.png" "/usr/share/icons/Humanity/mimes/128/text-x-processing.png"
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-256.png" "/usr/share/icons/Humanity/mimes/256/text-x-processing.png"
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-512.png" "/usr/share/icons/Humanity/mimes/512/text-x-processing.png"
-sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-1024.png" "/usr/share/icons/Humanity/mimes/1024/text-x-processing.png"
-# desktop launcher
-sudo touch /usr/share/applications/processing.desktop && echo "[Desktop Entry]
-Version=3.2.3
-Name=Processing
-Comment=Processing
-Exec=processing
-Icon=processing
-Terminal=false
-Type=Application
-Categories=AudioVideo;Video;Game;Graphics;Education;Development;" | sudo tee /usr/share/applications/processing.desktop
-sudo chmod a+x /usr/share/applications/processing.desktop
-# MIME type
-sudo touch /usr/share/mime/packages/processing.xml && echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<mime-info xmlns=\"http://www.freedesktop.org/standards/shared-mime-info\">
-    <mime-type type=\"text/x-processing\">
-        <comment>Processing source code</comment>
-        <sub-class-of type=\"text/x-csrc\"/>
-        <generic-icon name=\"text-x-processing\"/>
-        <glob pattern=\"*.pde\"/>
-    </mime-type>
-</mime-info>" | sudo tee /usr/share/mime/packages/processing.xml
-sudo gtk-update-icon-cache /usr/share/icons/Humanity
-sudo update-mime-database /usr/share/mime
-sudo gtk-update-icon-cache /usr/share/icons/hicolor
-# file association
-echo "text/x-processing=processing.desktop" | sudo tee --append /usr/share/applications/defaults.list
+    cd /tmp/
+    if [ ! -e processing-3.2.3-linux64.tgz ]
+    then
+        echo "Downloading Processing 3.2.3 ..."
+        wget "https://github-cloud.s3.amazonaws.com/releases/7807399/1e28c038-a4b6-11e6-8ac5-a66a2a864e43.tgz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAISTNZFOVBIJMK3TQ%2F20161127%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20161127T214832Z&X-Amz-Expires=300&X-Amz-Signature=434e5822813f988088433d41a5c119d9ac3779c0658c6075c120ae2dde7a6390&X-Amz-SignedHeaders=host&actor_id=0&response-content-disposition=attachment%3B%20filename%3Dprocessing-3.2.3-linux64.tgz&response-content-type=application%2Foctet-stream"
+    fi
+    echo "Extracting ..."
+    tar -xzf processing-3.2.3-linux64.tgz
+    mv processing-3.2.3/ "$installdir/processing-3.2.3/"
+    sudo ln -s "$installdir/processing-3.2.3/processing" "/usr/bin/processing"
+    # icons
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-16.png" "/usr/share/icons/hicolor/16x16/apps/processing.png"
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-32.png" "/usr/share/icons/hicolor/32x32/apps/processing.png"
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-48.png" "/usr/share/icons/hicolor/48x48/apps/processing.png"
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-64.png" "/usr/share/icons/hicolor/64x64/apps/processing.png"
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-128.png" "/usr/share/icons/hicolor/128x128/apps/processing.png"
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-256.png" "/usr/share/icons/hicolor/256x256/apps/processing.png"
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-512.png" "/usr/share/icons/hicolor/512x512/apps/processing.png"
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-1024.png" "/usr/share/icons/hicolor/1024x1024/apps/processing.png"
+    # mime thumbnails
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-16.png" "/usr/share/icons/Humanity/mimes/16/text-x-processing.png"
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-32.png" "/usr/share/icons/Humanity/mimes/32/text-x-processing.png"
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-48.png" "/usr/share/icons/Humanity/mimes/48/text-x-processing.png"
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-64.png" "/usr/share/icons/Humanity/mimes/64/text-x-processing.png"
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-128.png" "/usr/share/icons/Humanity/mimes/128/text-x-processing.png"
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-256.png" "/usr/share/icons/Humanity/mimes/256/text-x-processing.png"
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-512.png" "/usr/share/icons/Humanity/mimes/512/text-x-processing.png"
+    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-1024.png" "/usr/share/icons/Humanity/mimes/1024/text-x-processing.png"
+    # desktop launcher
+    sudo touch /usr/share/applications/processing.desktop && echo "[Desktop Entry]
+    Version=3.2.3
+    Name=Processing
+    Comment=Processing
+    Exec=processing
+    Icon=processing
+    Terminal=false
+    Type=Application
+    Categories=AudioVideo;Video;Game;Graphics;Education;Development;" | sudo tee /usr/share/applications/processing.desktop
+    sudo chmod a+x /usr/share/applications/processing.desktop
+    # MIME type
+    sudo touch /usr/share/mime/packages/processing.xml && echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+    <mime-info xmlns=\"http://www.freedesktop.org/standards/shared-mime-info\">
+        <mime-type type=\"text/x-processing\">
+            <comment>Processing source code</comment>
+            <sub-class-of type=\"text/x-csrc\"/>
+            <generic-icon name=\"text-x-processing\"/>
+            <glob pattern=\"*.pde\"/>
+        </mime-type>
+    </mime-info>" | sudo tee /usr/share/mime/packages/processing.xml
+    sudo gtk-update-icon-cache /usr/share/icons/Humanity
+    sudo update-mime-database /usr/share/mime
+    sudo gtk-update-icon-cache /usr/share/icons/hicolor
+    # file association
+    echo "text/x-processing=processing.desktop" | sudo tee --append /usr/share/applications/defaults.list
 fi
 
 # Arduino
@@ -379,19 +379,18 @@ clear
 read -p "Install Arduino 1.6.8? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
 then 
-cd /tmp/
-if [ -e arduino-1.6.8-linux64.tar.xz ]
-then
-    rm arduino-1.6.8-linux64.tar.xz
-fi
-echo "Downloading Arduino 1.6.8 ..."
-wget "https://downloads.arduino.cc/arduino-1.6.8-linux64.tar.xz"
-echo "Extracting ..."
-tar -xf arduino-1.6.8-linux64.tar.xz
-mv arduino-1.6.8/ /home/$USER/Executables/arduino-1.6.8
-cd ~/Executables/arduino-1.6.8/
-./install.sh
-sudo usermod -a -G dialout $USER
+    cd /tmp/
+    if [ ! -e arduino-1.6.8-linux64.tar.xz ]
+    then
+        echo "Downloading Arduino 1.6.8 ..."
+        wget "https://downloads.arduino.cc/arduino-1.6.8-linux64.tar.xz"
+    fi
+    echo "Extracting ..."
+    tar -xf "arduino-1.6.8-linux64.tar.xz"
+    sudo mv "arduino-1.6.8/" "$installdir/arduino-1.6.8"
+    cd "$installdir/arduino-1.6.8"
+    ./install.sh
+    sudo usermod -a -G dialout $USER
 fi
 
 clear
