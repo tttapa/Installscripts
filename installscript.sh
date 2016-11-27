@@ -394,6 +394,8 @@ then
     sudo usermod -a -G dialout $USER
 fi
 
+## Teensyduino
+
 clear
 read -p "Install Teensyduino 1.28? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
@@ -416,25 +418,31 @@ chmod +x TeensyduinoInstall.linux64
 fi
 
 ## Brackets
+
 clear
-read -p "Install Brackets 1.7? [Y/n]: " inst
+read -p "Install Brackets 1.8? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
 then 
-echo "Installing Brackets 1.7 ..."
+echo "Installing Brackets 1.8 ..."
 cd /tmp/
-if [ -e "libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb" ]
-    then rm "libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb"
+# TODO: nog nodig?
+if [ ! -e "libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb" ]
+    then
+    echo "Downloading dependencies ..."
+    wget "https://launchpadlibrarian.net/201289896/libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb"
+
 fi
-if [ -e "Brackets.Release.1.7.64-bit.deb" ]
-    then rm "Brackets.Release.1.7.64-bit.deb"
+if [ ! -e "Brackets.Release.1.8.64-bit.deb" ]
+    then 
+    echo "Downloading ..."
+    wget "https://github.com/adobe/brackets/releases/download/release-1.8/Brackets.Release.1.8.64-bit.deb"  
 fi
-echo "Downloading ..."
-wget "https://github.com/adobe/brackets/releases/download/release-1.7/Brackets.Release.1.7.64-bit.deb"
-wget https://launchpadlibrarian.net/201289896/libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb
 echo "Installing ..."
 sudo dpkg -i "libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb"
+# TODO: nog nodig?
 sudo apt-get -f install
 sudo dpkg -i "Brackets.Release.1.7.64-bit.deb"
+# TODO: nog nodig?
 sudo apt-get -f install
 fi
 
