@@ -1,17 +1,69 @@
 #!/bin/bash  
 
-installdir = ""
+clear
 
-while [ ! -e $installdir ]
-do
-read -p "Installation directory? " installdir
+## Define colors
+
+LBLUE='\033[1;34m'
+GREEN='\033[0;32m'
+LGREEN='\033[1;32m'
+RED='\033[0;31m'
+LRED='\033[1;31m'
+PURPLE='\033[0;35m'
+LPURPLE='\033[1;35m'
+NC='\033[0m' # No Color
+
+## Prompt installation directory
+
+#installdir="\0"
+installdir="$HOME/bin"
+
+if [ ! -e $installdir ]
+then
+	echo -e "${PURPLE}${installdir}${NC}"
+	read -p "Folder does not exist. Create new folder? [Y/n]: " confirm
+	if [ "$confirm" = y ] || [ "$confirm" = Y ] 
+		then
+		mkdir "$installdir"
+	fi
+fi
+
+confirmed=false
+
+while ! "$confirmed"
+	do
+	while [ ! -e $installdir ]
+		do
+		read -p "Installation directory? " installdir
+		if [ ! -e $installdir ]
+		then
+			read -p "Folder does not exist. Create new folder? [Y/n]: " confirm
+			if [ "$confirm" = y ] || [ "$confirm" = Y ] 
+				then
+				mkdir "$installdir"
+			fi
+		fi
+	done
+
+	if test "$installdir"
+	then	
+		cd "$installdir"
+		installdir=$(pwd)
+		echo -e ${LBLUE}$installdir${NC}
+	
+		read -p "Confirm installation directory? [Y/n]: " confirmInput
+		if [ "$confirmInput" = y ] || [ "$confirmInput" = Y ] 
+			then
+			confirmed=true
+		else 
+			installdir="\0"
+		fi
+	fi
 done
 
+echo -e "${GREEN}Confirmed${NC}. \r\nInstalling to ${LBLUE}${installdir}${NC}.\r\n\r\n"
 
-if [ ! -e /home/$USER/Executables/ ]
-then
-    mkdir /home/$USER/Executables/
-fi
+## Git
        
 clear
 read -p "Install Git? [Y/n]: " inst
@@ -22,6 +74,19 @@ sudo apt-get install git
 fi
 
 cd ~
+
+## Automount
+
+clear
+read -p "Do you want to automatically mount an NTFS partition? [Y/n]: " inst
+if [ "$inst" = y ] || [ "$inst" = Y ]
+then
+echo "Select the right drive  and the right partition, click more actions (gears), Edit Mount Options, check Mount at startup, uncheck Show in user interface because of a bug, and change the mount point."
+read -p "Press [Enter] key to open Disks."
+gnome-disks
+fi
+
+## Link home directories
 
 clear
 read -p "Link home directories to DATA? [y/N]: " inst
@@ -107,9 +172,18 @@ then
   fi
   ln -s "/media/$USER/DATA/Ubuntu Home/Executables" /home/$USER/ 
 
+  if [ -e Android ]
+  then rmdir Android
+  fi
+  if [ ! -e "/media/$USER/DATA/Ubuntu Home/Android" ]
+  then mkdir "/media/$USER/DATA/Ubuntu Home/Android"
+  fi
+  ln -s "/media/$USER/DATA/Ubuntu Home/Android" /home/$USER/
+
 read -p "Press enter to continue."
 fi
 
+## gksu
 
 clear
 read -p "Install gksu? [Y/n]: " inst
@@ -119,14 +193,7 @@ echo "Installing gksu ..."
 sudo apt-get install "gksu"
 fi
 
-clear
-read -p "Do you want to automatically mount an NTFS partition? [Y/n]: " inst
-if [ "$inst" = y ] || [ "$inst" = Y ]
-then
-echo "Select the right drive  and the right partition, click more actions (gears), Edit Mount Options, check Mount at startup, uncheck Show in user interface because of a bug, and change the mount point."
-read -p "Press [Enter] key to open Disks."
-gnome-disks
-fi
+## Google Chrome
 
 clear
 read -p "Install Google Chrome? [Y/n]: " inst
@@ -142,6 +209,8 @@ sudo dpkg -i "google-chrome-stable_current_amd64.deb"
 sudo apt-get -f install
 fi
 
+## Restricted Extras
+
 clear
 read -p "Install Ubuntu Restricted Extras? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
@@ -150,20 +219,24 @@ echo "Installing Ubuntu Restricted Extras ..."
 sudo apt-get install "ubuntu-restricted-extras"
 fi
 
+## Virtualbox
+
 clear
 read -p "Install Oracle Virtualbox? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
 then 
 echo "Installing Oracle Virtualbox ..."
 cd /tmp/
-rm "virtualbox-5.0_5.0.22-108108~Ubuntu~xenial_amd64.deb"
+rm "virtualbox-5.1_5.1.10-112026~Ubuntu~xenial_amd64.deb"
 echo "Downloading ..."
-wget "http://download.virtualbox.org/virtualbox/5.0.22/virtualbox-5.0_5.0.22-108108~Ubuntu~xenial_amd64.deb"
+wget "http://download.virtualbox.org/virtualbox/5.1.10/virtualbox-5.1_5.1.10-112026~Ubuntu~xenial_amd64.deb"
 echo "Installing ..."
 sudo apt-get install libqt4-opengl
-sudo dpkg -i "virtualbox-5.0_5.0.22-108108~Ubuntu~xenial_amd64.deb"
+sudo dpkg -i "virtualbox-5.1_5.1.10-112026~Ubuntu~xenial_amd64.deb"
 sudo apt-get -f install
 fi
+
+## Subwoofer connect
 
 clear
 read -p "Do you want to connect the subwoofer? [Y/n]: " inst
@@ -174,6 +247,8 @@ echo "Select Show unconnected pins, find pin 0x10, choose Internal Speaker (LFE)
 read -p "Press [Enter] key to open HdaJackRetask."
 hdajackretask
 fi
+
+## Spotify
 
 clear
 read -p "Install Spotify? [Y/n]: " inst
@@ -190,6 +265,8 @@ sudo apt-get update
 sudo apt-get install spotify-client
 fi
 
+## CPU indicator
+
 clear
 read -p "Install CPU indicator? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
@@ -197,6 +274,8 @@ then
 echo "Installing  CPU indicator ..."
 sudo apt-get install "indicator-cpufreq"
 fi
+
+## Oracle Java 8
 
 clear
 read -p "Install Oracle Java 8? [Y/n]: " inst
@@ -210,24 +289,7 @@ echo "Installing Oracle Java 8 ..."
 sudo apt-get install oracle-java8-installer
 fi
 
-clear
-read -p "Install CUDA? [Y/n]: " inst
-if [ "$inst" = y ] || [ "$inst" = Y ]
-then 
-echo "Installing CUDA ..."
-cd /tmp/
-# if [ ! -e cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb ]
-if [ ! -e cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64.deb ]
-then
-echo "Downloading ..."
-# wget "http://developer.download.nvidia.com/compute/cuda/7.5/Prod/local_installers/cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb"
-wget "http://developer.download.nvidia.com/compute/cuda/8.0/secure/prod/local_installers/cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64.deb"
-fi
-# sudo dpkg -i cuda-repo-ubuntu1404-7-5-local_7.5-18_amd64.deb
-sudo dpkg -i cuda-repo-ubuntu1604-8-0-local_8.0.44-1_amd64.deb
-sudo apt-get update
-sudo apt-get install cuda
-fi
+## Blender
 
 clear
 read -p "Install Blender 2.77a? [Y/n]: " inst
@@ -241,18 +303,11 @@ wget "http://download.blender.org/release/Blender2.77/blender-2.77a-linux-glibc2
 fi
 echo "Extracting ..."
 tar jxf blender-2.77a-linux-glibc211-x86_64.tar.bz2
-mv blender-2.77a-linux-glibc211-x86_64/ /home/$USER/Executables/blender-2.77a 
-sudo touch /usr/share/applications/blender.desktop
-echo "[Desktop Entry]
-Version=2.77a
-Name=Blender
-Comment=Blender
-Exec=/home/$USER/Executables/blender-2.77a/blender
-Icon=/home/$USER/Executables/blender-2.77a/icons/scalable/apps/blender.svg
-Terminal=false
-Type=Application
-Categories=AudioVideo;Video;Game;Graphics;" | sudo tee /usr/share/applications/blender.desktop
-sudo chmod a+x /usr/share/applications/blender.desktop 
+mv blender-2.77a-linux-glibc211-x86_64/ "$installdir/blender-2.77a"
+sudo ln -s "$installdir/blender-2.77a/blender" "/usr/bin/blender"
+sudo ln -s "$installdir/blender-2.77a/blender.svg" "/usr/share/icons/hicolor/scalable/apps/blender.svg"
+sudo cp "${installdir}/blender-2.77a/blender.desktop" "/usr/share/applications/blender.desktop"
+sudo chmod a+x "/usr/share/applications/blender.desktop" 
 echo "application/x-blender=blender.desktop" | sudo tee --append /usr/share/applications/defaults.list
 fi
 
