@@ -631,32 +631,38 @@ then
     sudo eclipse-installer/eclipse-inst
 fi
 
-
+## Android Studio
 
 clear
 read -p "Install Android Studio? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
 then 
-cd /tmp/
-if [ -e android-studio-ide-145.3330264-linux.zip ]
-then
-    #rm android-studio-ide-145.3330264-linux.zip
-echo "No download"
-fi
-echo "Downloading Android Studio ..."
-#wget "https://dl.google.com/dl/android/studio/ide-zips/2.2.1.0/android-studio-ide-145.3330264-linux.zip"
-echo "Extracting ..."
-unzip android-studio-ide-145.3330264-linux.zip
-# sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libz1:i386 libncurses5:i386 libbz2-1.0:i386 libstdc++6:i386 lib32bz2-1.0 
-sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
+    cd /tmp/
+    if [ -e android-studio-ide-145.3330264-linux.zip ]
+    then
+        #rm android-studio-ide-145.3330264-linux.zip
+    echo "No download"
+    fi
+    echo "Downloading Android Studio ..."
+    #wget "https://dl.google.com/dl/android/studio/ide-zips/2.2.1.0/android-studio-ide-145.3330264-linux.zip"
+    echo "Extracting ..."
+    unzip android-studio-ide-145.3330264-linux.zip
+    # sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libz1:i386 libncurses5:i386 libbz2-1.0:i386 libstdc++6:i386 lib32bz2-1.0 
+    sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
 
-sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
-sudo usermod -a -G libvirtd $USER
+    sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
+    sudo usermod -a -G libvirtd $USER
 
-mv android-studio/ ~/Executables/android-studio
-cd ~/Executables/android-studio
-./bin/studio.sh
+    mv android-studio/ "$installdir/android-studio"
+    cd "$installdir/android-studio"
+    # TODO
+    read -p "Please select the option to install Android Studio. [Enter] to launch."
+    ./bin/studio.sh
+
+    # TODO .gradle, .iml mime types
 fi
+
+## Eagle
 
 clear
 read -p "Install Eagle 7.7? [Y/n]: " inst
