@@ -453,6 +453,7 @@ if [ "$inst" = y ] || [ "$inst" = Y ]
 then 
     cd /tmp/
     if [ ! -e "code_1.7.2-1479766213_amd64.deb" ]
+    then
         echo "Downloading ..."
         wget "https://az764295.vo.msecnd.net/stable/7ba55c5860b152d999dda59393ca3ebeb1b5c85f/code_1.7.2-1479766213_amd64.deb"
     fi
