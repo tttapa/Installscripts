@@ -603,7 +603,7 @@ if [ "$inst" = y ] || [ "$inst" = Y ]
 then 
     echo "Installing qjackctl ..."
     cd /tmp/
-    if [ ! -e "qjackctl_0.4.2-0ubuntu2_amd64.deb"]
+    if [ ! -e "qjackctl_0.4.2-0ubuntu2_amd64.deb" ]
     then
         echo "Downloading ..."
         wget "http://launchpadlibrarian.net/252204219/qjackctl_0.4.2-0ubuntu2_amd64.deb"
