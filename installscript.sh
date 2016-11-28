@@ -475,23 +475,31 @@ fi
 
 ## Installer for JUCE (https://www.juce.com/)
 clear
-read -p "Install Juce Grapefruit? [Y/n]: " inst
+read -p "Install JUCE Grapefruit? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
 then
-    cd ~ 
+    cd "$installdir"
+    ## Backup projects folder
     if [ -e "JUCE/Projects" ]
     then
         mv JUCE/Projects/ /tmp/tmpJUCEProjects/
     fi
+    ## Delete current installation of JUCE
     if [ -e "JUCE" ]
     then
         rm -rf JUCE
     fi
 
-    ## https://forum.juce.com/t/freeze-when-opening-filechooser/16026/38
-    echo "Cloning Juce Grapefruit (developer) ..."
-    #git clone -b develop https://github.com/julianstorer/JUCE
-    git clone https://github.com/julianstorer/JUCE.git
+    read -p "Download developer version? [y/N]" dev
+    if [ "$dev" == "y" ] || [ "$dev" == "Y" ]
+    then
+        ## https://forum.juce.com/t/freeze-when-opening-filechooser/16026/38
+        echo "Cloning JUCE Grapefruit (developer) ..."
+        git clone -b develop https://github.com/julianstorer/JUCE
+    else
+        echo "Cloning JUCE Grapefruit ..."
+        git clone https://github.com/julianstorer/JUCE.git
+    fi
 
     ## Install dependencies for Juce: (https://forum.juce.com/t/juce-4-2-1-setup-on-apt-based-linux-ubuntu-16-04-lts-mint-elementary-os-freya/17164)
     sudo apt-get -q update
@@ -515,19 +523,26 @@ then
 
     if [ ! $? -eq 0 ]
     then
-        echo "Building the Projector failed."
-        exit
+        echo -e "${RED}Building the Projucer failed.${NC}"
+    else
+        echo -e "${LGREEN}Built successfully.${NC}"
     fi
 
-    mv build/Projucer ~/JUCE/
+    mv build/Projucer "$installdir/JUCE/"
 
     ## Create a Desktop launcher
-    sudo touch /usr/share/applications/projucer.desktop
-    echo "[Desktop Entry]
+
+    sudo ln -s "$installdir/JUCE/Projucer" "/usr/bin/projucer"
+    sudo ln -s "$installdir/JUCE/extras/Projucer/Source/BinaryData/juce_icon.png" "/usr/share/icons/hicolor/512x512/projucer.png"
+    sudo ln -s "$installdir/JUCE/extras/Projucer/Source/BinaryData/background_logo.svg" "/usr/share/icons/Humanity/mimes/48/application-x-juce.png"
+    
+
+
+    sudo touch /usr/share/applications/projucer.desktop && echo "[Desktop Entry]
 Name=Projucer
 Comment=Juce Grapefruit Projucer
-Exec=/home/$USER/JUCE/Projucer
-Icon=/home/$USER/JUCE/extras/Projucer/Source/BinaryData/juce_icon.png
+Exec=projucer
+Icon=projucer
 Terminal=false
 Type=Application
 Categories=AudioVideo;Audio;Graphics;Development;IDE;ProjectManagement;" | sudo tee /usr/share/applications/projucer.desktop
@@ -540,14 +555,19 @@ Categories=AudioVideo;Audio;Graphics;Development;IDE;ProjectManagement;" | sudo 
         <mime-type type=\"application/x-juce\">
             <comment>JUCE project</comment>
             <sub-class-of type=\"application/xml\"/>
+            <generic-icon name=\"application-x-juce\"/>
             <glob pattern=\"*.jucer\"/>
         </mime-type>
     </mime-info>" | sudo tee /usr/share/mime/packages/juce.xml
+    sudo gtk-update-icon-cache /usr/share/icons/Humanity
     sudo update-mime-database /usr/share/mime
+    sudo gtk-update-icon-cache /usr/share/icons/hicolor
     echo "application/x-juce=projucer.desktop" | sudo tee --append /usr/share/applications/defaults.list
     echo "Installed"
 fi
+
 ## Steinberg VST SDK 3
+
 clear
 read -p "Download Steinberg VST SDK 3? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
