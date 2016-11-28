@@ -621,12 +621,11 @@ read -p "Install Eclipse Neon? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
 then 
     cd /tmp/
-    if [ -e eclipse-inst-linux64.tar.gz ]
+    if [ ! -e eclipse-inst-linux64.tar.gz ]
     then
-        rm eclipse-inst-linux64.tar.gz
+        echo "Downloading Eclipse Neon ..."
+        wget "http://www.mirrorservice.org/sites/download.eclipse.org/eclipseMirror/oomph/epp/neon/R/eclipse-inst-linux64.tar.gz"
     fi
-    echo "Downloading Eclipse Neon ..."
-    wget "http://www.mirrorservice.org/sites/download.eclipse.org/eclipseMirror/oomph/epp/neon/R/eclipse-inst-linux64.tar.gz"
     echo "Extracting ..."
     tar -xzf eclipse-inst-linux64.tar.gz
     sudo eclipse-installer/eclipse-inst
