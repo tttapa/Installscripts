@@ -600,31 +600,38 @@ clear
 read -p "Install qjackctl? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
 then 
-echo "Installing qjackctl ..."
-cd /tmp/
-rm "qjackctl_0.4.2-0ubuntu2_amd64.deb"
-echo "Downloading ..."
-wget "http://launchpadlibrarian.net/252204219/qjackctl_0.4.2-0ubuntu2_amd64.deb"
-echo "Installing ..."
-sudo dpkg -i "qjackctl_0.4.2-0ubuntu2_amd64.deb"
-sudo apt-get -f install
+    echo "Installing qjackctl ..."
+    cd /tmp/
+    if [ ! -e "qjackctl_0.4.2-0ubuntu2_amd64.deb"]
+    then
+        echo "Downloading ..."
+        wget "http://launchpadlibrarian.net/252204219/qjackctl_0.4.2-0ubuntu2_amd64.deb"
+    fi
+    echo "Installing ..."
+    sudo dpkg -i "qjackctl_0.4.2-0ubuntu2_amd64.deb"
+    # TODO: is dit nog nodig?
+    sudo apt-get -f install
 fi
+
+## Eclipse Neon
 
 clear
 read -p "Install Eclipse Neon? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
 then 
-cd /tmp/
-if [ -e eclipse-inst-linux64.tar.gz ]
-then
-    rm eclipse-inst-linux64.tar.gz
+    cd /tmp/
+    if [ -e eclipse-inst-linux64.tar.gz ]
+    then
+        rm eclipse-inst-linux64.tar.gz
+    fi
+    echo "Downloading Eclipse Neon ..."
+    wget "http://www.mirrorservice.org/sites/download.eclipse.org/eclipseMirror/oomph/epp/neon/R/eclipse-inst-linux64.tar.gz"
+    echo "Extracting ..."
+    tar -xzf eclipse-inst-linux64.tar.gz
+    sudo eclipse-installer/eclipse-inst
 fi
-echo "Downloading Eclipse Neon ..."
-wget "http://www.mirrorservice.org/sites/download.eclipse.org/eclipseMirror/oomph/epp/neon/R/eclipse-inst-linux64.tar.gz"
-echo "Extracting ..."
-tar -xzf eclipse-inst-linux64.tar.gz
-eclipse-installer/eclipse-inst
-fi
+
+
 
 clear
 read -p "Install Android Studio? [Y/n]: " inst
