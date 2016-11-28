@@ -16,7 +16,7 @@ NC='\033[0m' # No Color
 ## Prompt installation directory
 
 #installdir="\0"
-installdir="$HOME/bin"
+installdir="$HOME/Executables"
 
 if [ ! -e $installdir ]
 then
@@ -321,7 +321,7 @@ then
     if [ ! -e processing-3.2.3-linux64.tgz ]
     then
         echo "Downloading Processing 3.2.3 ..."
-        wget "https://github-cloud.s3.amazonaws.com/releases/7807399/1e28c038-a4b6-11e6-8ac5-a66a2a864e43.tgz?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAISTNZFOVBIJMK3TQ%2F20161127%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20161127T214832Z&X-Amz-Expires=300&X-Amz-Signature=434e5822813f988088433d41a5c119d9ac3779c0658c6075c120ae2dde7a6390&X-Amz-SignedHeaders=host&actor_id=0&response-content-disposition=attachment%3B%20filename%3Dprocessing-3.2.3-linux64.tgz&response-content-type=application%2Foctet-stream"
+        wget "http://download.processing.org/processing-3.2.3-linux64.tgz"
     fi
     echo "Extracting ..."
     tar -xzf processing-3.2.3-linux64.tgz
