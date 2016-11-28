@@ -594,26 +594,7 @@ then
     echo "Downloaded."
 fi
 
-clear
-read -p "Install Boost 1.61.0? [Y/n]: " inst
-if [ "$inst" = y ] || [ "$inst" = Y ]
-then 
-cd /tmp/
-if [ -e boost_1_61_0.tar.bz2 ]
-then
-    rm boost_1_61_0.tar.bz2
-fi
-echo "Downloading Boost 1.61.0 ..."
-wget "http://downloads.sourceforge.net/project/boost/boost/1.61.0/boost_1_61_0.tar.bz2?r=&ts=1466631392&use_mirror=liquidtelecom"
-echo "Extracting ..."
-mv "boost_1_61_0.tar.bz2?r=&ts=1466631392&use_mirror=liquidtelecom" boost_1_61_0.tar.bz2
-tar -jxf boost_1_61_0.tar.bz2
-cd boost_1_61_0/
-sudo ./bootstrap.sh
-sudo ./b2 install
-sudo ldconfig
-read -p "Press enter to continue."
-fi
+## Qjackctl
 
 clear
 read -p "Install qjackctl? [Y/n]: " inst
