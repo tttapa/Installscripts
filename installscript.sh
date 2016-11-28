@@ -441,7 +441,7 @@ then
     sudo dpkg -i "libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb"
     # TODO: nog nodig?
     sudo apt-get -f install
-    sudo dpkg -i "Brackets.Release.1.7.64-bit.deb"
+    sudo dpkg -i "Brackets.Release.1.8.64-bit.deb"
     # TODO: nog nodig?
     sudo apt-get -f install
 fi
