@@ -587,7 +587,7 @@ then
     fi
     if [ -e "/home/$USER/SDKs/VST3 SDK" ]
     then
-        rm -r "/home/$USER/SDKs/VST3 SDK"
+        rm -rf "/home/$USER/SDKs/VST3 SDK"
     fi
     mv "VST3 SDK/" "/home/$USER/SDKs"
 
