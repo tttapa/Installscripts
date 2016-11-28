@@ -423,44 +423,44 @@ clear
 read -p "Install Brackets 1.8? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
 then 
-echo "Installing Brackets 1.8 ..."
-cd /tmp/
-# TODO: nog nodig?
-if [ ! -e "libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb" ]
-    then
-    echo "Downloading dependencies ..."
-    wget "https://launchpadlibrarian.net/201289896/libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb"
+    echo "Installing Brackets 1.8 ..."
+    cd /tmp/
+    # TODO: nog nodig?
+    if [ ! -e "libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb" ]
+        then
+        echo "Downloading dependencies ..."
+        wget "https://launchpadlibrarian.net/201289896/libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb"
 
-fi
-if [ ! -e "Brackets.Release.1.8.64-bit.deb" ]
-    then 
-    echo "Downloading ..."
-    wget "https://github.com/adobe/brackets/releases/download/release-1.8/Brackets.Release.1.8.64-bit.deb"  
-fi
-echo "Installing ..."
-sudo dpkg -i "libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb"
-# TODO: nog nodig?
-sudo apt-get -f install
-sudo dpkg -i "Brackets.Release.1.7.64-bit.deb"
-# TODO: nog nodig?
-sudo apt-get -f install
+    fi
+    if [ ! -e "Brackets.Release.1.8.64-bit.deb" ]
+        then 
+        echo "Downloading ..."
+        wget "https://github.com/adobe/brackets/releases/download/release-1.8/Brackets.Release.1.8.64-bit.deb"  
+    fi
+    echo "Installing ..."
+    sudo dpkg -i "libgcrypt11_1.5.3-2ubuntu4.2_amd64.deb"
+    # TODO: nog nodig?
+    sudo apt-get -f install
+    sudo dpkg -i "Brackets.Release.1.7.64-bit.deb"
+    # TODO: nog nodig?
+    sudo apt-get -f install
 fi
 
 ## Visual Studio Code
 clear
-read -p "Install Visual Studio Code 1.4.0? [Y/n]: " inst
+read -p "Install Visual Studio Code 1.7.2? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
 then 
-echo "Installing Visual Studio Code 1.4.0 ..."
-cd /tmp/
-if [ -e "code_1.4.0-1470329130_amd64.deb" ]
-    then rm "code_1.4.0-1470329130_amd64.deb"
-fi
-echo "Downloading ..."
-wget "https://az764295.vo.msecnd.net/stable/6276dcb0ae497766056b4c09ea75be1d76a8b679/code_1.4.0-1470329130_amd64.deb"
-echo "Installing ..."
-sudo dpkg -i "code_1.4.0-1470329130_amd64.deb"
-sudo apt-get -f install
+    cd /tmp/
+    if [ ! -e "code_1.7.2-1479766213_amd64.deb" ]
+        echo "Downloading ..."
+        wget "https://az764295.vo.msecnd.net/stable/7ba55c5860b152d999dda59393ca3ebeb1b5c85f/code_1.7.2-1479766213_amd64.deb"
+    fi
+    echo "Installing ..."
+        
+    sudo dpkg -i "code_1.7.2-1479766213_amd64.deb"
+    # TODO: nog nodig?
+    sudo apt-get -f install
 fi
 
 ## Code::Blocks
