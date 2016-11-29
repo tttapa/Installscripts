@@ -333,18 +333,18 @@ then
     sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-48.png" "/usr/share/icons/hicolor/48x48/apps/processing.png"
     sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-64.png" "/usr/share/icons/hicolor/64x64/apps/processing.png"
     sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-128.png" "/usr/share/icons/hicolor/128x128/apps/processing.png"
-    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-256.png" "/usr/share/icons/hicolor/256x256/apps/processing.png"
-    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-512.png" "/usr/share/icons/hicolor/512x512/apps/processing.png"
-    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-1024.png" "/usr/share/icons/hicolor/1024x1024/apps/processing.png"
+    sudo mkdir -p "/usr/share/icons/hicolor/256x256/apps/" && sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-256.png" "/usr/share/icons/hicolor/256x256/apps/processing.png"
+    sudo mkdir -p "/usr/share/icons/hicolor/512x512/apps/" && sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-512.png" "/usr/share/icons/hicolor/512x512/apps/processing.png"
+    sudo mkdir -p "/usr/share/icons/hicolor/1024x1024/apps/" && sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-1024.png" "/usr/share/icons/hicolor/1024x1024/apps/processing.png"
     # mime thumbnails
     sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-16.png" "/usr/share/icons/Humanity/mimes/16/text-x-processing.png"
     sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-32.png" "/usr/share/icons/Humanity/mimes/32/text-x-processing.png"
     sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-48.png" "/usr/share/icons/Humanity/mimes/48/text-x-processing.png"
     sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-64.png" "/usr/share/icons/Humanity/mimes/64/text-x-processing.png"
     sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-128.png" "/usr/share/icons/Humanity/mimes/128/text-x-processing.png"
-    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-256.png" "/usr/share/icons/Humanity/mimes/256/text-x-processing.png"
-    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-512.png" "/usr/share/icons/Humanity/mimes/512/text-x-processing.png"
-    sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-1024.png" "/usr/share/icons/Humanity/mimes/1024/text-x-processing.png"
+    sudo mkdir -p "/usr/share/icons/Humanity/mimes/256/" && sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-256.png" "/usr/share/icons/Humanity/mimes/256/text-x-processing.png"
+    sudo mkdir -p "/usr/share/icons/Humanity/mimes/512/" && sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-512.png" "/usr/share/icons/Humanity/mimes/512/text-x-processing.png"
+    sudo mkdir -p "/usr/share/icons/Humanity/mimes/1024/" && sudo ln -s "$installdir/processing-3.2.3/lib/icons/pde-1024.png" "/usr/share/icons/Humanity/mimes/1024/text-x-processing.png"
     # desktop launcher
     sudo touch /usr/share/applications/processing.desktop && echo "[Desktop Entry]
     Version=3.2.3
