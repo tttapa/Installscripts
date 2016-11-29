@@ -491,7 +491,7 @@ then
         rm -rf JUCE
     fi
 
-    read -p "Download developer version? [y/N]" dev
+    read -p "Download developer version? [y/N]: " dev
     if [ "$dev" == "y" ] || [ "$dev" == "Y" ]
     then
         ## https://forum.juce.com/t/freeze-when-opening-filechooser/16026/38
