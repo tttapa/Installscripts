@@ -534,7 +534,7 @@ then
     ## Create a Desktop launcher
 
     sudo ln -s "$installdir/JUCE/Projucer" "/usr/bin/projucer"
-    sudo mkdir -p "/usr/share/icons/hicolor/512x512/" && sudo ln -s "$installdir/JUCE/extras/Projucer/Source/BinaryData/juce_icon.png" "/usr/share/icons/hicolor/512x512/projucer.png"
+    sudo mkdir -p "/usr/share/icons/hicolor/512x512/apps" && sudo ln -s "$installdir/JUCE/extras/Projucer/Source/BinaryData/juce_icon.png" "/usr/share/icons/hicolor/512x512/apps/projucer.png"
     sudo ln -s "$installdir/JUCE/extras/Projucer/Source/BinaryData/background_logo.svg" "/usr/share/icons/Humanity/mimes/48/application-x-juce.svg"
     
 
