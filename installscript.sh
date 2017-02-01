@@ -180,6 +180,14 @@ then
   fi
   ln -s "/media/$USER/DATA/Ubuntu Home/Android" /home/$USER/
 
+  if [ -e "VirtualBox VMs" ]
+  then rmdir "VirtualBox VMs"
+  fi
+  if [ ! -e "/media/$USER/DATA/Ubuntu Home/VirtualBox VMs" ]
+  then mkdir "/media/$USER/DATA/Ubuntu Home/VirtualBox VMs"
+  fi
+  ln -s "/media/$USER/DATA/Ubuntu Home/VirtualBox VMs" /home/$USER/
+
 read -p "Press enter to continue."
 fi
 
