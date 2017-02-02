@@ -429,7 +429,7 @@ if [ -e TeensyduinoInstall.linux64 ]
 then
     rm TeensyduinoInstall.linux64
 fi
-read -p "Please enter a version number (e.g. 135)" version
+read -p "Please enter a version number (e.g. 135): " version
 wget "https://www.pjrc.com/teensy/td_$version/TeensyduinoInstall.linux64"
 chmod +x TeensyduinoInstall.linux64
 ./TeensyduinoInstall.linux64
