@@ -384,20 +384,25 @@ fi
 # Arduino
 
 clear
-read -p "Install Arduino 1.6.8? [Y/n]: " inst
+read -p "Install Arduino IDE? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
 then 
+    read -p "Please enter a version number (e.g. 1.8.1): " version
     cd /tmp/
-    if [ ! -e arduino-1.6.8-linux64.tar.xz ]
+    if [ ! -e "arduino-$version-linux64.tar.xz" ]
     then
-        echo "Downloading Arduino 1.6.8 ..."
-        wget "https://downloads.arduino.cc/arduino-1.6.8-linux64.tar.xz"
+        echo "Downloading Arduino $version ..."
+        wget "https://downloads.arduino.cc/arduino-$version-linux64.tar.xz"
     fi
     echo "Extracting ..."
-    tar -xf "arduino-1.6.8-linux64.tar.xz"
-    sudo mv "arduino-1.6.8/" "$installdir/arduino-1.6.8"
-    cd "$installdir/arduino-1.6.8"
+    tar -xf "arduino-$version-linux64.tar.xz"
+    sudo mv "arduino-$version/" "$installdir/arduino-$version"
+    cd "$installdir/arduino-$version"
     ./install.sh
+    if [ -e "/usr/bin/arduino" ]
+    then
+        rm "/usr/bin/arduino"
+    fi
     sudo ln -s "arduino" "/usr/bin/arduino"
     sudo usermod -a -G dialout $USER
 fi
@@ -405,7 +410,7 @@ fi
 ## Teensyduino
 
 clear
-read -p "Install Teensyduino 1.28? [Y/n]: " inst
+read -p "Install Teensyduino? [Y/n]: " inst
 if [ "$inst" = y ] || [ "$inst" = Y ]
 then
 cd /tmp/
@@ -414,13 +419,18 @@ then
     rm 49-teensy.rules
 fi
 wget https://www.pjrc.com/teensy/49-teensy.rules
+if [ -e /etc/udev/rules.d/49-teensy.rules ]
+then
+    rm /etc/udev/rules.d/49-teensy.rules
+fi
 sudo cp 49-teensy.rules /etc/udev/rules.d/
 
 if [ -e TeensyduinoInstall.linux64 ]
 then
     rm TeensyduinoInstall.linux64
 fi
-wget https://www.pjrc.com/teensy/td_128/TeensyduinoInstall.linux64
+read -p "Please enter a version number (e.g. 135)" version
+wget "https://www.pjrc.com/teensy/td_$version/TeensyduinoInstall.linux64"
 chmod +x TeensyduinoInstall.linux64
 ./TeensyduinoInstall.linux64
 fi
