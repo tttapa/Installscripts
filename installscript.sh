@@ -416,7 +416,7 @@ then
 cd /tmp/
 if [ -e 49-teensy.rules ]
 then
-    rm 49-teensy.rules
+    sudo rm -f 49-teensy.rules
 fi
 wget https://www.pjrc.com/teensy/49-teensy.rules
 if [ -e /etc/udev/rules.d/49-teensy.rules ]
